@@ -28,10 +28,16 @@ template <class T> class LinkedList
     LinkedList();
     ~LinkedList();
     
+    void ResetCurrent(void){this->Current = NULL;}
     void AddToTail(T);
+    
+    T GetNext(void);
+    
     void PrintList(void);//the specified type must have a print function in order to use this
     
 };
+
+/**********************************************************************/
 
 template <class T> LinkedList<T>::LinkedList() //default constructor, create an empty list
 {
@@ -66,6 +72,20 @@ template <class T> void LinkedList<T>::AddToTail(T NewData)
         TempPntr->SetNext(NewNode);
         NewNode->SetNext(NULL);
     }
+}
+
+template <class T> T LinkedList<T>::GetNext(void)
+{   
+    if(this->Current==NULL)
+    {
+        this->Current = this->Head;
+    }
+    else
+    {
+        this->Current = this->Current->GetNext();
+    }
+    T ReqData = Current->GetData();
+    return ReqData;
 }
 
 template <class T> void LinkedList<T>::PrintList(void)
