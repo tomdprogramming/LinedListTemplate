@@ -28,10 +28,11 @@ template <class T> class LinkedList
     LinkedList();
     ~LinkedList();
     
-    void ResetCurrent(void){this->Current = NULL;}
+    void ResetCurrent(void){this->Current = this->Head;}
+    void* MoveToNextItem(void);
     void AddToTail(T);
     
-    T GetNext(void);
+    int GetData(T*);
     
     void PrintList(void);//the specified type must have a print function in order to use this
     
@@ -74,18 +75,31 @@ template <class T> void LinkedList<T>::AddToTail(T NewData)
     }
 }
 
-template <class T> T LinkedList<T>::GetNext(void)
+template <class T> int LinkedList<T>::GetData(T* ReturnPntr)
 {   
+    if(this->Current == NULL)
+    {
+        return -1;
+    }
+    else
+    {
+        *ReturnPntr = this->Current->GetData();
+        return 0;
+    }
+}
+
+template <class T> void* LinkedList<T>::MoveToNextItem(void)
+{
     if(this->Current==NULL)
     {
-        this->Current = this->Head;
+        this->Current=this->Head;
     }
     else
     {
         this->Current = this->Current->GetNext();
     }
-    T ReqData = Current->GetData();
-    return ReqData;
+    
+    return this->Current;
 }
 
 template <class T> void LinkedList<T>::PrintList(void)

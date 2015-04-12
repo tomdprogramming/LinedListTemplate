@@ -3,6 +3,9 @@
 
 int main(int argc, char* argv[])
 {
+    int ErrCheck;
+    void* NodePointer;
+    
     TomPointClass Point;
     
     TomPointClass Point1(1,2);
@@ -17,15 +20,18 @@ int main(int argc, char* argv[])
     
     MySecondList.ResetCurrent();
     
-    Point = MySecondList.GetNext();
+    ErrCheck = MySecondList.GetData(&Point);
+    MySecondList.MoveToNextItem();
     
     Point.PrintCoords();
     
-    Point = MySecondList.GetNext();
+    ErrCheck = MySecondList.GetData(&Point);
+    MySecondList.MoveToNextItem();
 
     Point.PrintCoords();    
     
-    Point = MySecondList.GetNext();
+    ErrCheck = MySecondList.GetData(&Point);
+    MySecondList.MoveToNextItem();
 
     Point.PrintCoords();    
 }
